@@ -1,2 +1,4 @@
-export * from './VisabilityOff';
-export * from './VisabilityOn';
+export * from './EmailOutlined';
+export * from './KeyOutlined';
+export * from './VisabilityOffOutlined';
+export * from './VisabilityOnOutlined';

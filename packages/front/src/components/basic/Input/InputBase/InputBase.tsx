@@ -5,12 +5,14 @@ import styles from './InputBase.module.css';
 export interface InputBaseProps
   extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   isError?: boolean;
+  prefixIcon?: React.ReactElement;
   suffixIcon?: React.ReactElement;
 }
 
 const InputBase: React.FC<InputBaseProps> = ({
   className,
   isError = false,
+  prefixIcon = null,
   suffixIcon = null,
   ...props
 }) => {
@@ -24,14 +26,16 @@ const InputBase: React.FC<InputBaseProps> = ({
         className
       )}
     >
+      {prefixIcon ? <span className={cn(styles.icon, styles.prefixIcon)}>{prefixIcon}</span> : null}
       <input
         className={cn(styles.input, {
+          [styles.inputWithPrefixIcon]: !!prefixIcon,
           [styles.inputWithSuffixIcon]: !!suffixIcon,
         })}
         type="text"
         {...props}
       />
-      {suffixIcon ? <span className={styles.suffixIcon}>{suffixIcon}</span> : null}
+      {suffixIcon ? <span className={cn(styles.icon, styles.suffixIcon)}>{suffixIcon}</span> : null}
     </div>
   );
 };

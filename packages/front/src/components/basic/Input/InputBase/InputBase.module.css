@@ -16,6 +16,10 @@
   font-family: inherit;
 }
 
+.inputWithPrefixIcon {
+  padding-left: 40px;
+}
+
 .inputWithSuffixIcon {
   padding-right: 40px;
 }
@@ -28,10 +32,17 @@
   border-color: var(--border-color-danger);
 }
 
-.suffixIcon {
+.icon {
   display: inline-flex;
   position: absolute;
-  right: 8px;
   justify-content: center;
   align-items: center;
+}
+
+.prefixIcon {
+  left: 8px;
+}
+
+.suffixIcon {
+  right: 8px;
 }

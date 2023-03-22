@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
-import { VisabilityOff, VisabilityOn } from '../../Icons';
+import { VisabilityOffOutlined, VisabilityOnOutlined } from '../../Icons';
 import InputBase, { InputBaseProps } from '../InputBase';
 import styles from './InputPassword.module.css';
 
@@ -18,7 +18,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({ visability = false, ...pr
     if (isVisible) {
       return (
         <button className={styles.iconButton} aria-label="Hide password.">
-          <VisabilityOff onClick={onSuffixClick} />
+          <VisabilityOffOutlined onClick={onSuffixClick} />
         </button>
       );
     }
@@ -28,7 +28,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({ visability = false, ...pr
         className={styles.iconButton}
         aria-label="Show password as plain text. Warning: this will display your password on the screen."
       >
-        <VisabilityOn onClick={onSuffixClick} />
+        <VisabilityOnOutlined onClick={onSuffixClick} />
       </button>
     );
   }, [isVisible, onSuffixClick]);

@@ -1,6 +1,6 @@
 import IconBase, { IconBaseProps } from './IconBase';
 
-export const VisabilityOff: React.FC<IconBaseProps> = (props) => {
+export const VisabilityOffOutlined: React.FC<IconBaseProps> = (props) => {
   return (
     <IconBase {...props}>
       <svg
@@ -17,4 +17,4 @@ export const VisabilityOff: React.FC<IconBaseProps> = (props) => {
   );
 };
 
-export default VisabilityOff;
+export default VisabilityOffOutlined;
