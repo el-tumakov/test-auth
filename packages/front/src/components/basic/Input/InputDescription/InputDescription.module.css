@@ -1,0 +1,5 @@
+.description {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-color-secondary);
+}

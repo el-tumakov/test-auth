@@ -1,0 +1,31 @@
+{
+  "name": "@auth-form/front",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@types/node": "18.15.5",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
+    "classnames": "^2.3.2",
+    "eslint": "8.36.0",
+    "eslint-config-next": "13.2.4",
+    "final-form": "^4.20.9",
+    "next": "13.2.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-final-form": "^6.5.9",
+    "typescript": "5.0.2"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.8.0",
+    "postcss": "^8.4.14",
+    "prettier": "2.8.6",
+    "prettier-plugin-css-order": "^1.3.0"
+  }
+}
