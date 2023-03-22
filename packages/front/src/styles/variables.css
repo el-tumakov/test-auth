@@ -1,7 +1,9 @@
 :root {
   --border-radius: 8px;
-  --border-color: rgb(212, 212, 216);
+  --border-color: #adaba8;
+  --border-color-danger: #b60000;
 
   --text-color-main: #18181b;
   --text-color-secondary: #585861;
+  --text-color-danger: #b60000;
 }

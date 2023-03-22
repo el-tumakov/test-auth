@@ -3,3 +3,7 @@
   margin-top: 4px;
   color: var(--text-color-secondary);
 }
+
+.isError {
+  color: var(--text-color-danger);
+}

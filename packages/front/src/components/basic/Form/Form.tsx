@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { createContext } from 'react';
 import { Form as FinalForm, FormProps as FinalFormProps } from 'react-final-form';
-import Field from '../Field';
+import createDecorator from 'final-form-focus';
 import styles from './Form.module.css';
 
 export interface FormProps extends FinalFormProps {
@@ -18,10 +18,13 @@ export const FormContext = createContext<FormContextType>({
   formName: '',
 });
 
+const focusOnError = createDecorator();
+
 const Form: React.FC<FormProps> = ({ name, className, children, ...props }) => {
   return (
     <FinalForm
       {...props}
+      decorators={[focusOnError]}
       render={({ handleSubmit }) => {
         return (
           <form className={cn(styles.form, className)} onSubmit={handleSubmit}>

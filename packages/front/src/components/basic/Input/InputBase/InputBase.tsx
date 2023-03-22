@@ -3,11 +3,13 @@ import cn from 'classnames';
 import styles from './InputBase.module.css';
 
 export interface InputBaseProps
-  extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {}
+  extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+  isError?: boolean;
+}
 
-const InputBase: React.FC<InputBaseProps> = ({ className, ...props }) => {
+const InputBase: React.FC<InputBaseProps> = ({ className, isError = false, ...props }) => {
   return (
-    <div className={cn(styles.wrap, className)}>
+    <div className={cn(styles.wrap, { [styles.isError]: isError }, className)}>
       <input className={styles.input} type="text" {...props} />
     </div>
   );

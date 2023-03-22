@@ -1,5 +1,6 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import { FieldContext } from '../Field';
+import FieldBase from '../FieldBase';
 import Input from '../../Input';
 import { InputBaseProps } from '../../Input/InputBase';
 
@@ -12,13 +13,15 @@ const FieldText: React.FC<FieldTextProps> = ({ children, label, description, ...
   const { input, meta, formName, id } = useContext(FieldContext);
 
   return (
-    <>
-      {label ? <Input.Label htmlFor={id}>{label}</Input.Label> : null}
-      <Input id={id} aria-describedby={`${id}:description`} {...input} {...props} />
-      {description ? (
-        <Input.Description id={`${id}:description`}>{description}</Input.Description>
-      ) : null}
-    </>
+    <FieldBase id={id} label={label} description={description} meta={meta}>
+      <Input
+        id={id}
+        aria-describedby={description ? `${id}:description` : undefined}
+        isError={meta.touched && meta.error}
+        {...input}
+        {...props}
+      />
+    </FieldBase>
   );
 };
 
