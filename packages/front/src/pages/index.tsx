@@ -23,11 +23,15 @@ export default function Home() {
           return errors;
         }}
       >
-        <Field name="email">
-          <Field.Text label="Email" />
-        </Field>
         <Field name="password">
-          <Field.Text label="Password" description="Please, input password" />
+          <Field.Password
+            label="Password"
+            description="Please, input password"
+            autoComplete="new-password"
+          />
+        </Field>
+        <Field name="email">
+          <Field.Text label="Email" type="email" autoComplete="email" />
         </Field>
         <button type="submit">Submit</button>
       </Form>

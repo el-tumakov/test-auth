@@ -1,6 +1,7 @@
 import { ChangeEvent, createContext, FocusEvent } from 'react';
 import { Field as FinalField, FieldRenderProps, UseFieldConfig } from 'react-final-form';
 import FieldItem from './FieldItem';
+import FieldPassword from './FieldPassword';
 import FieldText from './FieldText';
 
 interface FieldProps extends UseFieldConfig<any> {
@@ -29,7 +30,7 @@ export const FieldContext = createContext<FieldContextType>({
   id: '',
 });
 
-const Field: React.FC<FieldProps> & { Text: typeof FieldText } = ({
+const Field: React.FC<FieldProps> & { Text: typeof FieldText; Password: typeof FieldPassword } = ({
   name,
   children,
   onChange,
@@ -57,5 +58,6 @@ const Field: React.FC<FieldProps> & { Text: typeof FieldText } = ({
 };
 
 Field.Text = FieldText;
+Field.Password = FieldPassword;
 
 export default Field;

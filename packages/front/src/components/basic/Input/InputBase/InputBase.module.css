@@ -1,3 +1,9 @@
+.wrap {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
 .input {
   margin: 0;
   border: 1px solid var(--border-color);
@@ -10,10 +16,22 @@
   font-family: inherit;
 }
 
+.inputWithSuffixIcon {
+  padding-right: 40px;
+}
+
 .input::placeholder {
   color: var(--text-color-secondary);
 }
 
 .isError .input {
   border-color: var(--border-color-danger);
+}
+
+.suffixIcon {
+  display: inline-flex;
+  position: absolute;
+  right: 8px;
+  justify-content: center;
+  align-items: center;
 }

@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { FieldMetaState } from 'react-final-form';
 import Input from '../../Input';
 
-interface FieldTextProps {
+interface FieldWrapProps {
   id: string;
   children: React.ReactNode | React.ReactNode[];
   meta: FieldMetaState<any>;
@@ -10,7 +10,7 @@ interface FieldTextProps {
   description?: React.ReactNode;
 }
 
-const FieldBase: React.FC<FieldTextProps> = ({ id, label, description, meta, children }) => {
+const FieldWrap: React.FC<FieldWrapProps> = ({ id, label, description, meta, children }) => {
   const isError = useMemo(() => {
     return meta.touched && meta.error;
   }, [meta.error, meta.touched]);
@@ -28,7 +28,7 @@ const FieldBase: React.FC<FieldTextProps> = ({ id, label, description, meta, chi
       {label ? <Input.Label htmlFor={id}>{label}</Input.Label> : null}
       {children}
       {inputDescription ? (
-        <Input.Description id={`${id}:description`} isError={isError}>
+        <Input.Description id={`${id}-description`} isError={isError}>
           {inputDescription}
         </Input.Description>
       ) : null}
@@ -36,4 +36,4 @@ const FieldBase: React.FC<FieldTextProps> = ({ id, label, description, meta, chi
   );
 };
 
-export default FieldBase;
+export default FieldWrap;

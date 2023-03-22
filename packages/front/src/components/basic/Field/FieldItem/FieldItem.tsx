@@ -25,7 +25,7 @@ const FieldItem: React.FC<FieldItemProps> = ({
   const { formName } = useContext(FormContext);
 
   const id = useMemo(() => {
-    return `${formName}:${input.name}`;
+    return `${formName}-${input.name}`;
   }, [formName, input.name]);
 
   const handleChange = useCallback(
