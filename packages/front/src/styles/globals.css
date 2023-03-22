@@ -1,18 +1,19 @@
 html {
-  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  min-height: 100%;
   color: var(--text-color-main);
   font-weight: 400;
   font-size: 14px;
   line-height: 1.2;
 }
 
-body {
-  margin: 0;
-  height: 100%;
-}
-
 #__next {
-  height: 100%;
+  min-height: 100%;
 }
 
 *,

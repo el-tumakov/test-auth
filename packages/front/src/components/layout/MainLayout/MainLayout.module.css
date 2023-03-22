@@ -1,4 +1,12 @@
 .main {
+  position: relative;
   padding: 16px;
-  height: 100%;
+  padding-top: 68px;
+  min-height: 100%;
+}
+
+.main .themeToggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
 }

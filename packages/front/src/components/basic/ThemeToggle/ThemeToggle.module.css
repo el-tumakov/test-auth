@@ -1,0 +1,39 @@
+.toggle {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  background-color: transparent;
+  padding: 4px;
+  width: 72px;
+  height: 36px;
+}
+
+.toggle::before {
+  position: absolute;
+  left: 3px;
+  z-index: -1;
+  transition: all ease-in-out 200ms;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-color: var(--background-color-switch);
+  width: 26px;
+  height: 26px;
+  content: '';
+}
+
+.isDark::before {
+  left: 41px;
+}
+
+.lightIcon {
+  color: var(--icon-color-sun);
+}
+
+.nightIcon {
+  color: var(--icon-color-moon);
+}

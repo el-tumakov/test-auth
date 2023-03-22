@@ -17,8 +17,13 @@ const InputPassword: React.FC<InputPasswordProps> = ({ visability = false, ...pr
   const suffixIcon = useMemo(() => {
     if (isVisible) {
       return (
-        <button className={styles.iconButton} aria-label="Hide password.">
-          <VisabilityOffOutlined onClick={onSuffixClick} />
+        <button
+          className={styles.iconButton}
+          type="button"
+          aria-label="Hide password."
+          onClick={onSuffixClick}
+        >
+          <VisabilityOffOutlined />
         </button>
       );
     }
@@ -26,9 +31,11 @@ const InputPassword: React.FC<InputPasswordProps> = ({ visability = false, ...pr
     return (
       <button
         className={styles.iconButton}
+        type="button"
         aria-label="Show password as plain text. Warning: this will display your password on the screen."
+        onClick={onSuffixClick}
       >
-        <VisabilityOnOutlined onClick={onSuffixClick} />
+        <VisabilityOnOutlined />
       </button>
     );
   }, [isVisible, onSuffixClick]);
