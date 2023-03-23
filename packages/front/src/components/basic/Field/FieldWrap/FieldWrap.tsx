@@ -8,20 +8,24 @@ interface FieldWrapProps {
   meta: FieldMetaState<any>;
   label?: React.ReactNode;
   description?: React.ReactNode;
+  isError: boolean;
 }
 
-const FieldWrap: React.FC<FieldWrapProps> = ({ id, label, description, meta, children }) => {
-  const isError = useMemo(() => {
-    return meta.touched && meta.error;
-  }, [meta.error, meta.touched]);
-
+const FieldWrap: React.FC<FieldWrapProps> = ({
+  id,
+  label,
+  description,
+  meta,
+  children,
+  isError = false,
+}) => {
   const inputDescription = useMemo(() => {
     if (isError) {
-      return meta.error;
+      return meta.error || meta.submitError;
     }
 
     return description;
-  }, [description, isError, meta.error]);
+  }, [description, isError, meta.error, meta.submitError]);
 
   return (
     <>

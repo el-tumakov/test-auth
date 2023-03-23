@@ -17,6 +17,7 @@ interface FieldProps extends UseFieldConfig<any> {
 export interface FieldContextType extends FieldRenderProps<any> {
   formName: string;
   id: string;
+  isError: boolean;
 }
 
 export const FieldContext = createContext<FieldContextType>({
@@ -30,6 +31,7 @@ export const FieldContext = createContext<FieldContextType>({
   meta: {},
   formName: '',
   id: '',
+  isError: false,
 });
 
 const Field: React.FC<FieldProps> & {

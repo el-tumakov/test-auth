@@ -67,8 +67,12 @@ const FieldItem: React.FC<FieldItemProps> = ({
     return { ...input, onChange: handleChange, onFocus: handleFocus, onBlur: handleBlur };
   }, [handleBlur, handleChange, handleFocus, input]);
 
+  const isError = useMemo(() => {
+    return meta.touched && (meta.error || (meta.submitError && !meta.dirtySinceLastSubmit));
+  }, [meta.dirtySinceLastSubmit, meta.error, meta.submitError, meta.touched]);
+
   return (
-    <FieldContext.Provider value={{ input: inputProps, meta, formName, id }}>
+    <FieldContext.Provider value={{ input: inputProps, meta, formName, id, isError }}>
       <div
         className={cn(
           styles.wrap,

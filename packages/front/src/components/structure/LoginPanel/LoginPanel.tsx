@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import Link from 'next/link';
 import isEmail from 'validator/lib/isEmail';
 import { EmailOutlined, KeyOutlined } from '@/components/basic/Icons';
@@ -6,45 +6,47 @@ import { useStore } from '@/store';
 import Form from '@/components/basic/Form';
 import Field from '@/components/basic/Field';
 import Button from '@/components/basic/Button';
+import { signin } from '@/actions/auth';
+import { shake } from '@/utils';
 import styles from './LoginPanel.module.css';
 
 const LoginPanel = () => {
-  const errors = useRef<Record<string, string>>({});
   const [isShake, setShake] = useState(false);
   const { userEmail, setUserEmail } = useStore();
 
-  const validate = useCallback((values: Record<string, any>) => {
-    const newErrors: Record<string, string> = {};
+  const onSubmit = useCallback(async (values: any) => {
+    const errors: Record<string, string> = {};
+    let isError = false;
 
     if (!values.email || !isEmail(values.email)) {
-      newErrors.email = 'Value has to be an email';
+      isError = true;
+      errors.email = 'Value has to be an email';
     }
 
     if (!values.password) {
-      newErrors.password = 'Required';
+      isError = true;
+      errors.password = 'Password is required';
     }
 
-    errors.current = newErrors;
+    if (isError) {
+      shake(setShake);
 
-    return newErrors;
-  }, []);
-
-  const onClick = useCallback(() => {
-    if (Object.keys(errors.current).length) {
-      setShake(true);
-      setTimeout(() => setShake(false), 300);
+      return errors;
     }
+
+    return signin(values).catch((err) => {
+      if (err?.cause?.statusCode === 401) {
+        shake(setShake);
+
+        return { password: err.cause.message };
+      }
+    });
   }, []);
 
   return (
     <>
       <h1>Log in to your account</h1>
-      <Form
-        name="form"
-        onSubmit={(values) => console.log(values)}
-        validate={validate}
-        initialValues={{ email: userEmail }}
-      >
+      <Form name="form" onSubmit={onSubmit} initialValues={{ email: userEmail }}>
         <Field name="email" onChange={setUserEmail}>
           <Field.Text
             label="Email"
@@ -67,7 +69,7 @@ const LoginPanel = () => {
           </Field>
           <Link href="/recovery">Forgot password?</Link>
         </div>
-        <Button type="submit" fullWidth onClick={onClick} shake={isShake}>
+        <Button type="submit" shake={isShake} fullWidth>
           Login
         </Button>
         <p className={styles.registerDescription}>

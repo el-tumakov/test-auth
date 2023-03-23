@@ -1,44 +1,23 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import Link from 'next/link';
 import isEmail from 'validator/lib/isEmail';
 import { BadgeOutlined, EmailOutlined, KeyOutlined } from '@/components/basic/Icons';
 import Form from '@/components/basic/Form';
 import Field from '@/components/basic/Field';
 import Button from '@/components/basic/Button';
-import styles from './RegisterPanel.module.css';
 import PasswordStrength from '@/components/basic/PasswordStrength';
 import { useStore } from '@/store';
+import { signup } from '@/actions/auth';
+import { shake } from '@/utils';
+import styles from './RegisterPanel.module.css';
 
 const RegisterPanel = () => {
-  const errors = useRef<Record<string, string>>({});
   const { userEmail, setUserEmail } = useStore();
   const [isShake, setShake] = useState(false);
   const [isPasswordFocus, setPasswordFocus] = useState(false);
   const [passwordValue, setPasswordValue] = useState<string>();
 
-  const validate = useCallback((values: Record<string, any>) => {
-    const newErrors: Record<string, string> = {};
-    const correctPassword = /^(?=.*?[\p{L}])(?=.*?[\p{N}]).{8,}$/u;
-
-    if (!values.email || !isEmail(values.email)) {
-      newErrors.email = 'Value has to be an email';
-    }
-
-    if (!values.password || !correctPassword.test(values.password)) {
-      newErrors.password = 'Minimum 8 characters, 1 letter and 1 number';
-    }
-
-    errors.current = newErrors;
-
-    return newErrors;
-  }, []);
-
-  const onClick = useCallback(() => {
-    if (Object.keys(errors.current).length) {
-      setShake(true);
-      setTimeout(() => setShake(false), 300);
-    }
-  }, []);
+  console.log(passwordValue);
 
   const onPasswordFocus = useCallback(() => {
     setPasswordFocus(true);
@@ -48,16 +27,41 @@ const RegisterPanel = () => {
     setPasswordFocus(false);
   }, []);
 
+  const onSubmit = useCallback(async (values: any) => {
+    const errors: Record<string, string> = {};
+    const correctPassword = /^(?=.*?[\p{L}])(?=.*?[\p{N}]).{8,}$/u;
+    let isError = false;
+
+    if (!values.email || !isEmail(values.email)) {
+      isError = true;
+      errors.email = 'Value has to be an email';
+    }
+
+    if (!values.password || !correctPassword.test(values.password)) {
+      isError = true;
+      errors.password = 'Minimum 8 characters, 1 letter and 1 number';
+    }
+
+    if (isError) {
+      shake(setShake);
+
+      return errors;
+    }
+
+    return signup(values).catch((err) => {
+      if (err?.cause?.error) {
+        shake(setShake);
+
+        return err.cause.error;
+      }
+    });
+  }, []);
+
   return (
     <>
       <h1>Register a new account</h1>
-      <Form
-        name="form"
-        onSubmit={(values) => console.log(values)}
-        validate={validate}
-        initialValues={{ email: userEmail }}
-      >
-        <Field name="email" onChange={setUserEmail}>
+      <Form name="form" onSubmit={onSubmit}>
+        <Field name="email" onChange={(value) => setUserEmail(value)} initialValue={userEmail}>
           <Field.Text
             label="Email"
             type="email"
@@ -88,7 +92,7 @@ const RegisterPanel = () => {
           />
           {isPasswordFocus ? <PasswordStrength password={passwordValue} /> : null}
         </Field>
-        <Button type="submit" fullWidth onClick={onClick} shake={isShake}>
+        <Button type="submit" shake={isShake} fullWidth>
           Create a new account
         </Button>
         <p className={styles.registerDescription}>

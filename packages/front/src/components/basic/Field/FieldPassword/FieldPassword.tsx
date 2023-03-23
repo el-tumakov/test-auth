@@ -13,14 +13,14 @@ const FieldPassword: React.FC<FieldPasswordProps> = ({
   description,
   ...props
 }) => {
-  const { input, meta, id } = useContext(FieldContext);
+  const { input, meta, id, isError } = useContext(FieldContext);
 
   return (
-    <FieldWrap id={id} label={label} description={description} meta={meta}>
+    <FieldWrap id={id} label={label} description={description} meta={meta} isError={isError}>
       <Input.Password
         id={id}
         aria-describedby={description ? `${id}-description` : undefined}
-        isError={meta.touched && meta.error}
+        isError={isError}
         {...input}
         {...props}
       />
