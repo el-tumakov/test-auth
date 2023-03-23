@@ -1,0 +1,17 @@
+.wrap {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.authWrap {
+  box-shadow: var(--block-box-shadow);
+  border: 1px solid var(--block-border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--background-color-secondary);
+  padding: 32px;
+  width: 100%;
+  max-width: 446px;
+}

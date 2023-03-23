@@ -1,8 +1,13 @@
 :root {
   --accent-color: #0162e8;
 
+  --success-color: #15a34a;
+  --warning-color: #ca8a05;
+  --danger-color: #df0303;
+
   --background-color: #f9fafb;
   --background-color-secondary: #ffffff;
+  --background-color-third: #d8dde5;
   --background-color-switch: #f9fafb;
 
   --border-radius: 8px;
@@ -34,8 +39,13 @@
 [data-theme='dark'] {
   --accent-color: #2663eb;
 
+  --success-color: #15a34a;
+  --warning-color: #ca8a05;
+  --danger-color: #ff5252;
+
   --background-color: #111827;
   --background-color-secondary: #1f2937;
+  --background-color-third: #374151;
   --background-color-switch: #374151;
 
   --border-radius: 8px;

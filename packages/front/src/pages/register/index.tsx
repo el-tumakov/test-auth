@@ -1,12 +1,12 @@
 import MainLayout from '@/components/layout/MainLayout';
 import AuthLayout from '@/components/layout/AuthLayout';
-import LoginPanel from '@/components/structure/LoginPanel';
+import RegisterPanel from '@/components/structure/RegisterPanel';
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
-    <MainLayout title="Login">
+    <MainLayout title="Registration">
       <AuthLayout>
-        <LoginPanel />
+        <RegisterPanel />
       </AuthLayout>
     </MainLayout>
   );
