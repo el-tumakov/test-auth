@@ -1,47 +1,65 @@
 :root {
   --accent-color: #0162e8;
 
-  --background-color: #ffffff;
-  --background-color-secondary: #585861;
-  --background-color-switch: #18181b;
+  --background-color: #f9fafb;
+  --background-color-secondary: #ffffff;
+  --background-color-switch: #f9fafb;
 
   --border-radius: 8px;
-  --border-color: #adaba8;
-  --border-color-danger: #b60000;
+  --border-color: #d1d5db;
+  --border-color-danger: #df0303;
 
-  --text-color-main: #18181b;
-  --text-color-secondary: #585861;
-  --text-color-danger: #b60000;
+  --input-color-background: #f9fafb;
+  --input-color-placeholder: #9ca3af;
 
-  --icon-color: #585861;
-  --icon-color-sun: #faea1a;
+  --text-color-main: #111827;
+  --text-color-secondary: #6b7280;
+  --text-color-danger: #df0303;
+
+  --icon-color: #6b7280;
+  --icon-color-sun: #eed606;
   --icon-color-moon: #585861;
 
   --button-text-color: #ffffff;
   --button-text-color-disabled: #cdc8c8;
+  --button-color-hover: #1d4ed8;
   --button-color-disabled: #8e8e95;
+
+  --link-color: #0162e8;
+
+  --block-border-color: transparent;
+  --block-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
 }
 
 [data-theme='dark'] {
-  --accent-color: #3c3cbb;
+  --accent-color: #2663eb;
 
-  --background-color: #0d1117;
-  --background-color-secondary: #161b22;
-  --background-color-switch: #2c3643;
+  --background-color: #111827;
+  --background-color-secondary: #1f2937;
+  --background-color-switch: #374151;
 
   --border-radius: 8px;
-  --border-color: #30363d;
-  --border-color-danger: #f03434;
+  --border-color: #4b5563;
+  --border-color-danger: #ff5252;
 
-  --text-color-main: #c9d1d9;
-  --text-color-secondary: #a1a1a1;
-  --text-color-danger: #f03434;
+  --input-color-background: #374151;
+  --input-color-placeholder: #9ca3af;
 
-  --icon-color: #a1a1a1;
+  --text-color-main: #ffffff;
+  --text-color-secondary: #9ca3af;
+  --text-color-danger: #ff5252;
+
+  --icon-color: #9ca3af;
   --icon-color-sun: #585861;
   --icon-color-moon: #6767e8;
 
-  --button-text-color: #efefef;
+  --button-text-color: #ffffff;
   --button-text-color-disabled: #efefef;
-  --button-color-disabled: #a1a1a1;
+  --button-color-hover: #1d4ed8;
+  --button-color-disabled: #9ca3af;
+
+  --link-color: #6595ff;
+
+  --block-border-color: #4b5563;
+  --block-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
 }

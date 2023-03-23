@@ -1,8 +1,9 @@
 .main {
+  display: flex;
   position: relative;
-  padding: 16px;
-  padding-top: 68px;
-  min-height: 100%;
+  flex-grow: 1;
+  flex-direction: column;
+  padding: 68px 16px;
 }
 
 .main .themeToggle {
