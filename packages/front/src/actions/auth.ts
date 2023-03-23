@@ -1,7 +1,6 @@
 import { CtxType, request } from '@/utils';
-import { AuthSigninDto, AuthSignupDto } from 'server/src/modules/auth/dtos';
 
-export const signin = async (data: AuthSigninDto, ctx?: CtxType) => {
+export const signin = async (data: { email: string; password: string }, ctx?: CtxType) => {
   return request<{ token: string }>(
     {
       method: 'POST',
@@ -12,7 +11,10 @@ export const signin = async (data: AuthSigninDto, ctx?: CtxType) => {
   );
 };
 
-export const signup = async (data: AuthSignupDto, ctx?: CtxType) => {
+export const signup = async (
+  data: { email: string; name: string; password: string },
+  ctx?: CtxType
+) => {
   return request<{ token: string }>(
     {
       method: 'POST',
