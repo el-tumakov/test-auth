@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "paths": {
+      "@api*": ["src/api/*"],
+      "@auth/*": ["src/modules/auth/*"],
+      "@common/*": ["src/common/*"],
+      "@config/*": ["src/config/*"],
+      "@files/*": ["src/modules/files/*"],
+      "@sessions/*": ["src/modules/sessions/*"],
+      "@users/*": ["src/modules/users/*"],
+      "@notifications/*": ["src/modules/notifications/*"],
+      "@templates/*": ["src/modules/templates/*"],
+      "@verification/*": ["src/modules/verification/*"]
+    },
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "esModuleInterop": true
+  }
+}
