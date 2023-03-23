@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -9,6 +9,7 @@ import {
 } from '@nestjs/swagger';
 
 import { AuthService } from '@auth/auth.service';
+import { SessionsService } from '@sessions/sessions.service';
 
 import { AuthSession, GetIdentity } from '@auth/decorators';
 import { ApiValidation } from '@common/decorators';
@@ -18,6 +19,7 @@ import { AuthSigninResponseDto } from '@auth/dtos/auth-signin-response.dto';
 import { RequestNewPasswordDto } from '@auth/dtos/request-new-password.dto';
 import { SetNewPasswordDto } from '@auth/dtos/set-new-password.dto';
 import { CleanResponseDto } from '@common/dtos';
+import { CheckSessionResponseDto } from '@sessions/dtos';
 import {
   VerificationCheckCodeDto,
   VerificationCodeDto,
@@ -30,7 +32,10 @@ import { IIdentity } from '@common/interfaces';
 @ApiCreatedResponse({ type: CleanResponseDto })
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private sessionServie: SessionsService,
+  ) {}
 
   @ApiOperation({ summary: 'Signup' })
   @ApiCreatedResponse({ type: AuthSigninResponseDto })
@@ -47,6 +52,15 @@ export class AuthController {
   @Post('/signin')
   async signIn(@Body() authSigninDto: AuthSigninDto) {
     return this.authService.signIn(authSigninDto);
+  }
+
+  @ApiOperation({ summary: 'Check session' })
+  @ApiBearerAuth()
+  @ApiResponse({ type: CheckSessionResponseDto })
+  @AuthSession()
+  @Get('/check-session')
+  async checkSession(@GetIdentity() identity: IIdentity) {
+    return this.sessionServie.checkSession(identity.token);
   }
 
   @ApiOperation({ summary: 'Request new password' })
@@ -68,8 +82,10 @@ export class AuthController {
   @ApiOperation({ summary: 'Logout' })
   @ApiBearerAuth()
   @AuthSession()
-  @Post('/logout')
+  @Delete('/logout')
   async logout(@GetIdentity() identity: IIdentity) {
-    return this.authService.logout(identity.sessionId);
+    await this.authService.logout(identity.sessionId);
+
+    return {};
   }
 }
