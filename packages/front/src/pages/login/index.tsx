@@ -4,7 +4,7 @@ import LoginPanel from '@/components/structure/LoginPanel';
 
 export default function LoginPage() {
   return (
-    <MainLayout title="Login">
+    <MainLayout title="Authorization" description="Authorization in Egor Tumakov's test project">
       <AuthLayout>
         <LoginPanel />
       </AuthLayout>

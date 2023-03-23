@@ -4,7 +4,10 @@ import RecoveryPanel from '@/components/structure/RecoveryPanel';
 
 export default function RecoveryPage() {
   return (
-    <MainLayout title="Password recovery">
+    <MainLayout
+      title="Password recovery"
+      description="Password recovery in Egor Tumakov's test project"
+    >
       <AuthLayout>
         <RecoveryPanel />
       </AuthLayout>
