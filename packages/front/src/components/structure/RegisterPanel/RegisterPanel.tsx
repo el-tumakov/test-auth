@@ -7,9 +7,11 @@ import Field from '@/components/basic/Field';
 import Button from '@/components/basic/Button';
 import styles from './RegisterPanel.module.css';
 import PasswordStrength from '@/components/basic/PasswordStrength';
+import { useStore } from '@/store';
 
 const RegisterPanel = () => {
   const errors = useRef<Record<string, string>>({});
+  const { userEmail, setUserEmail } = useStore();
   const [isShake, setShake] = useState(false);
   const [isPasswordFocus, setPasswordFocus] = useState(false);
   const [passwordValue, setPasswordValue] = useState<string>();
@@ -49,8 +51,13 @@ const RegisterPanel = () => {
   return (
     <>
       <h1>Register a new account</h1>
-      <Form name="form" onSubmit={(values) => console.log(values)} validate={validate}>
-        <Field name="email">
+      <Form
+        name="form"
+        onSubmit={(values) => console.log(values)}
+        validate={validate}
+        initialValues={{ email: userEmail }}
+      >
+        <Field name="email" onChange={setUserEmail}>
           <Field.Text
             label="Email"
             type="email"

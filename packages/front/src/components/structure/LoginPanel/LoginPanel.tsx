@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import Link from 'next/link';
 import isEmail from 'validator/lib/isEmail';
 import { EmailOutlined, KeyOutlined } from '@/components/basic/Icons';
+import { useStore } from '@/store';
 import Form from '@/components/basic/Form';
 import Field from '@/components/basic/Field';
 import Button from '@/components/basic/Button';
@@ -10,6 +11,7 @@ import styles from './LoginPanel.module.css';
 const LoginPanel = () => {
   const errors = useRef<Record<string, string>>({});
   const [isShake, setShake] = useState(false);
+  const { userEmail, setUserEmail } = useStore();
 
   const validate = useCallback((values: Record<string, any>) => {
     const newErrors: Record<string, string> = {};
@@ -37,8 +39,13 @@ const LoginPanel = () => {
   return (
     <>
       <h1>Log in to your account</h1>
-      <Form name="form" onSubmit={(values) => console.log(values)} validate={validate}>
-        <Field name="email">
+      <Form
+        name="form"
+        onSubmit={(values) => console.log(values)}
+        validate={validate}
+        initialValues={{ email: userEmail }}
+      >
+        <Field name="email" onChange={setUserEmail}>
           <Field.Text
             label="Email"
             type="email"
