@@ -14,6 +14,7 @@ import { AuthSession, GetIdentity } from '@auth/decorators';
 import { ApiValidation } from '@common/decorators';
 
 import { AuthSigninDto, AuthSignupDto } from '@auth/dtos';
+import { AuthSigninResponseDto } from '@auth/dtos/auth-signin-response.dto';
 import { RequestNewPasswordDto } from '@auth/dtos/request-new-password.dto';
 import { SetNewPasswordDto } from '@auth/dtos/set-new-password.dto';
 import { CleanResponseDto } from '@common/dtos';
@@ -32,22 +33,20 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @ApiOperation({ summary: 'Signup' })
+  @ApiCreatedResponse({ type: AuthSigninResponseDto })
   @Post('/signup')
   async signUp(@Body() body: AuthSignupDto) {
-    await this.authService.signUp(body);
-
-    return {};
+    return this.authService.signUp(body);
   }
 
   @ApiOperation({ summary: 'Signin' })
+  @ApiCreatedResponse({ type: AuthSigninResponseDto })
   @ApiUnauthorizedResponse({
     description: 'Please check your login credentials',
   })
   @Post('/signin')
   async signIn(@Body() authSigninDto: AuthSigninDto) {
-    await this.authService.signIn(authSigninDto);
-
-    return {};
+    return this.authService.signIn(authSigninDto);
   }
 
   @ApiOperation({ summary: 'Request new password' })

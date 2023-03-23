@@ -1,5 +1,6 @@
 import {
   IsEmail,
+  IsOptional,
   IsString,
   Matches,
   MaxLength,
@@ -21,6 +22,7 @@ export class AuthSignupDto {
 
   @ApiPropertyOptional({ example: 'John Snow' })
   @IsString()
+  @IsOptional()
   name?: string;
 
   @ApiProperty({

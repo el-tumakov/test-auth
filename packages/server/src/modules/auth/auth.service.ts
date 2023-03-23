@@ -39,11 +39,11 @@ export class AuthService {
       password: hashedPassword,
     });
 
-    await this.sessionsService.createSession({
+    const session = await this.sessionsService.createSession({
       userId: user.id,
     });
 
-    return user;
+    return { token: session.token };
   }
 
   async signIn(authSigninDto: AuthSigninDto) {
@@ -51,11 +51,11 @@ export class AuthService {
     const user = await this.usersService.findByEmail(email);
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      await this.sessionsService.createSession({
+      const session = await this.sessionsService.createSession({
         userId: user.id,
       });
 
-      return {};
+      return { token: session.token };
     }
 
     throw new UnauthorizedException('Please check your login credentials');
