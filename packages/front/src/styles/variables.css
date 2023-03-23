@@ -1,4 +1,6 @@
 :root {
+  --accent-color: #0162e8;
+
   --background-color: #ffffff;
   --background-color-secondary: #585861;
   --background-color-switch: #18181b;
@@ -14,9 +16,15 @@
   --icon-color: #585861;
   --icon-color-sun: #faea1a;
   --icon-color-moon: #585861;
+
+  --button-text-color: #ffffff;
+  --button-text-color-disabled: #cdc8c8;
+  --button-color-disabled: #8e8e95;
 }
 
 [data-theme='dark'] {
+  --accent-color: #3c3cbb;
+
   --background-color: #0d1117;
   --background-color-secondary: #161b22;
   --background-color-switch: #2c3643;
@@ -32,4 +40,8 @@
   --icon-color: #a1a1a1;
   --icon-color-sun: #585861;
   --icon-color-moon: #6767e8;
+
+  --button-text-color: #efefef;
+  --button-text-color-disabled: #efefef;
+  --button-color-disabled: #a1a1a1;
 }

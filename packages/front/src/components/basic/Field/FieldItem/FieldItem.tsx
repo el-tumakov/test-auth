@@ -5,7 +5,7 @@ import { FormContext } from '../../Form';
 import { FieldContext } from '../Field';
 import styles from './FieldItem.module.css';
 
-interface FieldItemProps extends FieldRenderProps<any> {
+interface FieldItemProps extends FieldRenderProps<any, HTMLInputElement> {
   children: React.ReactNode | React.ReactNode[];
   className?: string;
   onChange?: (value: any, evt: ChangeEvent<HTMLInputElement>) => any;
@@ -40,7 +40,7 @@ const FieldItem: React.FC<FieldItemProps> = ({
   );
 
   const handleFocus = useCallback(
-    (evt: FocusEvent<HTMLInputElement, Element>) => {
+    (evt: any) => {
       input.onFocus(evt);
 
       if (onFocus) {
@@ -51,7 +51,7 @@ const FieldItem: React.FC<FieldItemProps> = ({
   );
 
   const handleBlur = useCallback(
-    (evt: FocusEvent<HTMLInputElement, Element>) => {
+    (evt: any) => {
       input.onBlur(evt);
 
       if (onBlur) {

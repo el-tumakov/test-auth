@@ -1,0 +1,53 @@
+.button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 0;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--accent-color);
+  padding: 8px 16px;
+  min-height: 40px;
+  color: var(--button-text-color);
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+  background-color: var(--button-color-disabled);
+  color: var(--button-text-color-disabled);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.shake {
+  animation: shake 0.3s ease-in;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
