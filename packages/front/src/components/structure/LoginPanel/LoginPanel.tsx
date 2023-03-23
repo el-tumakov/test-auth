@@ -1,5 +1,7 @@
 import { useCallback, useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { setCookie } from 'cookies-next';
 import isEmail from 'validator/lib/isEmail';
 import { EmailOutlined, KeyOutlined } from '@/components/basic/Icons';
 import { useStore } from '@/store';
@@ -11,37 +13,46 @@ import { shake } from '@/utils';
 import styles from './LoginPanel.module.css';
 
 const LoginPanel = () => {
+  const router = useRouter();
   const [isShake, setShake] = useState(false);
   const { userEmail, setUserEmail } = useStore();
 
-  const onSubmit = useCallback(async (values: any) => {
-    const errors: Record<string, string> = {};
-    let isError = false;
+  const onSubmit = useCallback(
+    async (values: any) => {
+      const errors: Record<string, string> = {};
+      let isError = false;
 
-    if (!values.email || !isEmail(values.email)) {
-      isError = true;
-      errors.email = 'Value has to be an email';
-    }
+      if (!values.email || !isEmail(values.email)) {
+        isError = true;
+        errors.email = 'Value has to be an email';
+      }
 
-    if (!values.password) {
-      isError = true;
-      errors.password = 'Password is required';
-    }
+      if (!values.password) {
+        isError = true;
+        errors.password = 'Password is required';
+      }
 
-    if (isError) {
-      shake(setShake);
-
-      return errors;
-    }
-
-    return signin(values).catch((err) => {
-      if (err?.cause?.statusCode === 401) {
+      if (isError) {
         shake(setShake);
 
-        return { password: err.cause.message };
+        return errors;
       }
-    });
-  }, []);
+
+      return signin(values)
+        .then((response) => {
+          setCookie('tumakov.testauth.token', response.token);
+          router.push('/');
+        })
+        .catch((err) => {
+          if (err?.cause?.statusCode === 401) {
+            shake(setShake);
+
+            return { password: err.cause.message };
+          }
+        });
+    },
+    [router]
+  );
 
   return (
     <>

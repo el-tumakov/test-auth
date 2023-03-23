@@ -1,5 +1,7 @@
 import { useCallback, useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { setCookie } from 'cookies-next';
 import isEmail from 'validator/lib/isEmail';
 import { BadgeOutlined, EmailOutlined, KeyOutlined } from '@/components/basic/Icons';
 import Form from '@/components/basic/Form';
@@ -12,12 +14,11 @@ import { shake } from '@/utils';
 import styles from './RegisterPanel.module.css';
 
 const RegisterPanel = () => {
+  const router = useRouter();
   const { userEmail, setUserEmail } = useStore();
   const [isShake, setShake] = useState(false);
   const [isPasswordFocus, setPasswordFocus] = useState(false);
   const [passwordValue, setPasswordValue] = useState<string>();
-
-  console.log(passwordValue);
 
   const onPasswordFocus = useCallback(() => {
     setPasswordFocus(true);
@@ -27,35 +28,43 @@ const RegisterPanel = () => {
     setPasswordFocus(false);
   }, []);
 
-  const onSubmit = useCallback(async (values: any) => {
-    const errors: Record<string, string> = {};
-    const correctPassword = /^(?=.*?[\p{L}])(?=.*?[\p{N}]).{8,}$/u;
-    let isError = false;
+  const onSubmit = useCallback(
+    async (values: any) => {
+      const errors: Record<string, string> = {};
+      const correctPassword = /^(?=.*?[\p{L}])(?=.*?[\p{N}]).{8,}$/u;
+      let isError = false;
 
-    if (!values.email || !isEmail(values.email)) {
-      isError = true;
-      errors.email = 'Value has to be an email';
-    }
+      if (!values.email || !isEmail(values.email)) {
+        isError = true;
+        errors.email = 'Value has to be an email';
+      }
 
-    if (!values.password || !correctPassword.test(values.password)) {
-      isError = true;
-      errors.password = 'Minimum 8 characters, 1 letter and 1 number';
-    }
+      if (!values.password || !correctPassword.test(values.password)) {
+        isError = true;
+        errors.password = 'Minimum 8 characters, 1 letter and 1 number';
+      }
 
-    if (isError) {
-      shake(setShake);
-
-      return errors;
-    }
-
-    return signup(values).catch((err) => {
-      if (err?.cause?.error) {
+      if (isError) {
         shake(setShake);
 
-        return err.cause.error;
+        return errors;
       }
-    });
-  }, []);
+
+      return signup(values)
+        .then((response) => {
+          setCookie('tumakov.testauth.token', response.token);
+          router.push('/');
+        })
+        .catch((err) => {
+          if (err?.cause?.error) {
+            shake(setShake);
+
+            return err.cause.error;
+          }
+        });
+    },
+    [router]
+  );
 
   return (
     <>

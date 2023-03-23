@@ -34,6 +34,6 @@ export const request = async <T = any>(opts: RequestOptions, ctx: CtxType = {}):
       throw new Error(response.statusText, { cause: data });
     }
 
-    return response.json();
+    return data;
   });
 };
