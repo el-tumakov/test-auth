@@ -29,6 +29,7 @@
   --button-text-color-disabled: #cdc8c8;
   --button-color-hover: #1d4ed8;
   --button-color-disabled: #8e8e95;
+  --button-shadow-color: #00a5ff;
 
   --link-color: #0162e8;
 
@@ -67,6 +68,7 @@
   --button-text-color-disabled: #efefef;
   --button-color-hover: #1d4ed8;
   --button-color-disabled: #9ca3af;
+  --button-shadow-color: #00a5ff;
 
   --link-color: #6595ff;
 

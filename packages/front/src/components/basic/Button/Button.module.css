@@ -20,7 +20,7 @@
 }
 
 .button:focus-visible {
-  outline: 2px solid #00a5ff;
+  box-shadow: 0 0 0 3px var(--button-shadow-color);
 }
 
 .button:disabled {
