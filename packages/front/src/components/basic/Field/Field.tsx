@@ -1,5 +1,6 @@
 import { ChangeEvent, createContext, FocusEvent } from 'react';
 import { Field as FinalField, FieldRenderProps, UseFieldConfig } from 'react-final-form';
+import FieldCheckbox from './FieldCheckbox';
 import FieldItem from './FieldItem';
 import FieldPassword from './FieldPassword';
 import FieldText from './FieldText';
@@ -10,6 +11,7 @@ interface FieldProps extends UseFieldConfig<any> {
   onChange?: (value: any, evt: ChangeEvent<HTMLInputElement>) => any;
   onFocus?: (value: any, evt: FocusEvent<HTMLInputElement, Element>) => any;
   onBlur?: (value: any, evt: FocusEvent<HTMLInputElement, Element>) => any;
+  noMargin?: boolean;
 }
 
 export interface FieldContextType extends FieldRenderProps<any> {
@@ -30,14 +32,11 @@ export const FieldContext = createContext<FieldContextType>({
   id: '',
 });
 
-const Field: React.FC<FieldProps> & { Text: typeof FieldText; Password: typeof FieldPassword } = ({
-  name,
-  children,
-  onChange,
-  onFocus,
-  onBlur,
-  ...props
-}) => {
+const Field: React.FC<FieldProps> & {
+  Text: typeof FieldText;
+  Password: typeof FieldPassword;
+  Checkbox: typeof FieldCheckbox;
+} = ({ name, children, onChange, onFocus, onBlur, noMargin = false, ...props }) => {
   return (
     <FinalField name={name} {...props}>
       {({ input, meta }: FieldRenderProps<any>) => {
@@ -48,6 +47,7 @@ const Field: React.FC<FieldProps> & { Text: typeof FieldText; Password: typeof F
             onChange={onChange}
             onFocus={onFocus}
             onBlur={onBlur}
+            noMargin={noMargin}
           >
             {children}
           </FieldItem>
@@ -59,5 +59,6 @@ const Field: React.FC<FieldProps> & { Text: typeof FieldText; Password: typeof F
 
 Field.Text = FieldText;
 Field.Password = FieldPassword;
+Field.Checkbox = FieldCheckbox;
 
 export default Field;

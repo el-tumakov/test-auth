@@ -1,3 +1,7 @@
 .wrap {
   margin-bottom: 24px;
 }
+
+.noMargin {
+  margin: 0;
+}

@@ -1,0 +1,37 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.label {
+  cursor: pointer;
+  line-height: 16px;
+}
+
+.left {
+  order: 0;
+}
+
+.right {
+  order: 1;
+}
+
+.checkbox {
+  appearance: none;
+  cursor: pointer;
+  margin: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--input-background-color);
+  width: 16px;
+  height: 16px;
+}
+
+.checkbox:checked {
+  border: 2px solid var(--accent-color);
+  background-image: url('/checkbox.svg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: var(--accent-color);
+}

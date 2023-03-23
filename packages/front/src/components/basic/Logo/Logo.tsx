@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import LogoLight from '../../../../public/logo-light.svg';
 import LogoDark from '../../../../public/logo-dark.svg';
@@ -25,13 +26,15 @@ const Logo = () => {
   }
 
   return (
-    <Image
-      src={currentTheme === 'light' ? LogoLight : LogoDark}
-      alt="Tumakov logo"
-      width={200}
-      height={100}
-      priority
-    />
+    <Link href="/">
+      <Image
+        src={currentTheme === 'light' ? LogoLight : LogoDark}
+        alt="Tumakov logo"
+        width={200}
+        height={100}
+        priority
+      />
+    </Link>
   );
 };
 

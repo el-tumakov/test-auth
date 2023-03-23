@@ -11,6 +11,7 @@ interface FieldItemProps extends FieldRenderProps<any, HTMLInputElement> {
   onChange?: (value: any, evt: ChangeEvent<HTMLInputElement>) => any;
   onFocus?: (value: any, evt: FocusEvent<HTMLInputElement, Element>) => any;
   onBlur?: (value: any, evt: FocusEvent<HTMLInputElement, Element>) => any;
+  noMargin?: boolean;
 }
 
 const FieldItem: React.FC<FieldItemProps> = ({
@@ -21,6 +22,7 @@ const FieldItem: React.FC<FieldItemProps> = ({
   onChange,
   onFocus,
   onBlur,
+  noMargin = false,
 }) => {
   const { formName } = useContext(FormContext);
 
@@ -67,7 +69,16 @@ const FieldItem: React.FC<FieldItemProps> = ({
 
   return (
     <FieldContext.Provider value={{ input: inputProps, meta, formName, id }}>
-      <div className={cn(styles.wrap, className)} role="group">
+      <div
+        className={cn(
+          styles.wrap,
+          {
+            [styles.noMargin]: noMargin,
+          },
+          className
+        )}
+        role="group"
+      >
         {children}
       </div>
     </FieldContext.Provider>

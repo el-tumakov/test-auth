@@ -1,14 +1,14 @@
 import { useCallback, useRef, useState } from 'react';
 import Link from 'next/link';
 import isEmail from 'validator/lib/isEmail';
-import { EmailOutlined, KeyOutlined } from '@/components/basic/Icons';
+import { EmailOutlined } from '@/components/basic/Icons';
 import { useStore } from '@/store';
 import Form from '@/components/basic/Form';
 import Field from '@/components/basic/Field';
 import Button from '@/components/basic/Button';
-import styles from './LoginPanel.module.css';
+import styles from './RecoveryPanel.module.css';
 
-const LoginPanel = () => {
+const RecoveryPanel = () => {
   const errors = useRef<Record<string, string>>({});
   const [isShake, setShake] = useState(false);
   const { userEmail, setUserEmail } = useStore();
@@ -18,10 +18,6 @@ const LoginPanel = () => {
 
     if (!values.email || !isEmail(values.email)) {
       newErrors.email = 'Value has to be an email';
-    }
-
-    if (!values.password) {
-      newErrors.password = 'Required';
     }
 
     errors.current = newErrors;
@@ -38,7 +34,7 @@ const LoginPanel = () => {
 
   return (
     <>
-      <h1>Log in to your account</h1>
+      <h1>Password recovery</h1>
       <Form
         name="form"
         onSubmit={(values) => console.log(values)}
@@ -54,22 +50,12 @@ const LoginPanel = () => {
             prefixIcon={<EmailOutlined />}
           />
         </Field>
-        <Field name="password">
-          <Field.Password
-            label="Password"
-            autoComplete="current-password"
-            prefixIcon={<KeyOutlined />}
-          />
-        </Field>
-        <div className={styles.recoveryWrap}>
-          <Field name="isRemember" type="checkbox" noMargin>
-            <Field.Checkbox>Remember me</Field.Checkbox>
-          </Field>
-          <Link href="/recovery">Forgot password?</Link>
-        </div>
         <Button type="submit" fullWidth onClick={onClick} shake={isShake}>
-          Login
+          Send code
         </Button>
+        <p className={styles.registerDescription}>
+          Remembered your password? <Link href="/login">Login</Link>
+        </p>
         <p className={styles.registerDescription}>
           Don’t have an account yet? <Link href="/register">Register</Link>
         </p>
@@ -78,4 +64,4 @@ const LoginPanel = () => {
   );
 };
 
-export default LoginPanel;
+export default RecoveryPanel;

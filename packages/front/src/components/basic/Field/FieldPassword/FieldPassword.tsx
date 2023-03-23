@@ -13,7 +13,7 @@ const FieldPassword: React.FC<FieldPasswordProps> = ({
   description,
   ...props
 }) => {
-  const { input, meta, formName, id } = useContext(FieldContext);
+  const { input, meta, id } = useContext(FieldContext);
 
   return (
     <FieldWrap id={id} label={label} description={description} meta={meta}>
