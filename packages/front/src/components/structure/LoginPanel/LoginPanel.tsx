@@ -12,7 +12,7 @@ import { signin } from '@/actions/auth';
 import { shake } from '@/utils';
 import styles from './LoginPanel.module.css';
 
-const LoginPanel = () => {
+const LoginPanel: React.FC<{}> = () => {
   const router = useRouter();
   const [isShake, setShake] = useState(false);
   const { userEmail, setUserEmail } = useStore();
@@ -57,7 +57,7 @@ const LoginPanel = () => {
   return (
     <>
       <h1>Log in to your account</h1>
-      <Form name="form" onSubmit={onSubmit} initialValues={{ email: userEmail }}>
+      <Form name="loginForm" onSubmit={onSubmit} initialValues={{ email: userEmail }}>
         <Field name="email" onChange={setUserEmail}>
           <Field.Text
             label="Email"

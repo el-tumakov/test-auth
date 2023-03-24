@@ -12,6 +12,7 @@ interface FieldProps extends UseFieldConfig<any> {
   onFocus?: (value: any, evt: FocusEvent<HTMLInputElement, Element>) => any;
   onBlur?: (value: any, evt: FocusEvent<HTMLInputElement, Element>) => any;
   noMargin?: boolean;
+  className?: string;
 }
 
 export interface FieldContextType extends FieldRenderProps<any> {
@@ -38,12 +39,13 @@ const Field: React.FC<FieldProps> & {
   Text: typeof FieldText;
   Password: typeof FieldPassword;
   Checkbox: typeof FieldCheckbox;
-} = ({ name, children, onChange, onFocus, onBlur, noMargin = false, ...props }) => {
+} = ({ className, name, children, onChange, onFocus, onBlur, noMargin = false, ...props }) => {
   return (
     <FinalField name={name} {...props}>
       {({ input, meta }: FieldRenderProps<any>) => {
         return (
           <FieldItem
+            className={className}
             input={input}
             meta={meta}
             onChange={onChange}

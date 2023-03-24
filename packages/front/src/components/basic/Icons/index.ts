@@ -5,3 +5,4 @@ export * from './VisabilityOffOutlined';
 export * from './VisabilityOnOutlined';
 export * from './DarkModeOutlined';
 export * from './LightModeOutlined';
+export * from './LockOutlined';

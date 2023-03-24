@@ -1,0 +1,28 @@
+.description {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.text {
+  margin: 0;
+  color: var(--text-color-secondary);
+}
+
+.email {
+  font-weight: 700;
+}
+
+.button {
+  cursor: pointer;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  color: var(--link-color);
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.button:hover {
+  text-decoration: underline;
+}

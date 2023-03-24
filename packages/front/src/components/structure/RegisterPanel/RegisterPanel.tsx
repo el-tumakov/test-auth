@@ -10,10 +10,10 @@ import Button from '@/components/basic/Button';
 import PasswordStrength from '@/components/basic/PasswordStrength';
 import { useStore } from '@/store';
 import { signup } from '@/actions/auth';
-import { shake } from '@/utils';
+import { handleFormError, shake } from '@/utils';
 import styles from './RegisterPanel.module.css';
 
-const RegisterPanel = () => {
+const RegisterPanel: React.FC<{}> = () => {
   const router = useRouter();
   const { userEmail, setUserEmail } = useStore();
   const [isShake, setShake] = useState(false);
@@ -59,7 +59,7 @@ const RegisterPanel = () => {
           if (err?.cause?.error) {
             shake(setShake);
 
-            return err.cause.error;
+            return handleFormError(err?.cause?.error);
           }
         });
     },
@@ -69,7 +69,7 @@ const RegisterPanel = () => {
   return (
     <>
       <h1>Register a new account</h1>
-      <Form name="form" onSubmit={onSubmit}>
+      <Form name="registerForm" onSubmit={onSubmit}>
         <Field name="email" onChange={(value) => setUserEmail(value)} initialValue={userEmail}>
           <Field.Text
             label="Email"
