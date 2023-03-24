@@ -43,4 +43,12 @@ export class UsersService {
   async findByEmail(email: string) {
     return this.repo.findOne({ email });
   }
+
+  async updatePassword(user: User, password: string): Promise<User> {
+    this.repo.assign(user, { password });
+
+    await this.repo.flush();
+
+    return user;
+  }
 }

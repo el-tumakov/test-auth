@@ -36,4 +36,8 @@ export class VerificationCheckCodeDto {
   })
   @IsOptional()
   holdTime?: number | null;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  token?: string;
 }
