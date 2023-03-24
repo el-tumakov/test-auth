@@ -33,8 +33,12 @@
   color: var(--input-color-placeholder);
 }
 
-.isError .input:not(:focus) {
+.isError .input {
   border-color: var(--border-color-danger);
+}
+
+.isError .input:focus-visible {
+  box-shadow: 0 0 0 2px var(--border-color-danger);
 }
 
 .icon {
