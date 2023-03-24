@@ -62,12 +62,17 @@ export class AuthService {
   async signIn(authSigninDto: AuthSigninDto) {
     const { email, password } = authSigninDto;
     const user = await this.usersService.findByEmail(email);
+
+    if (!user) {
+      throw new UnauthorizedException('Please check your login credentials');
+    }
+
     const isValidPassword = await this.validatePassword(
       password,
       user.password,
     );
 
-    if (!user || !isValidPassword) {
+    if (!isValidPassword) {
       throw new UnauthorizedException('Please check your login credentials');
     }
 

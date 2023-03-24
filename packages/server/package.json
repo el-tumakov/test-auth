@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "nest build && npm run copy:templates",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "NODE_ENV=dev nest start --watch",
@@ -21,7 +21,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "migration:create": "NODE_ENV=$npm_config_env npx mikro-orm migration:create",
     "migration:up": "NODE_ENV=$npm_config_env npx mikro-orm migration:up",
-    "migration:down": "NODE_ENV=$npm_config_env npx mikro-orm migration:down"
+    "migration:down": "NODE_ENV=$npm_config_env npx mikro-orm migration:down",
+    "copy:templates": "cpx 'src/templates/**' 'dist/src/templates'"
   },
   "dependencies": {
     "@mikro-orm/cli": "^5.6.7",
@@ -42,6 +43,7 @@
     "bluebird": "^3.7.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "cpx": "^1.5.0",
     "dayjs": "^1.11.7",
     "joi": "^17.6.3",
     "lodash": "^4.17.21",
