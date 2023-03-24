@@ -57,8 +57,8 @@ const LoginPanel: React.FC<{}> = () => {
   return (
     <>
       <h1>Log in to your account</h1>
-      <Form name="loginForm" onSubmit={onSubmit} initialValues={{ email: userEmail }}>
-        <Field name="email" onChange={setUserEmail}>
+      <Form name="loginForm" onSubmit={onSubmit}>
+        <Field name="email" onChange={setUserEmail} initialValue={userEmail}>
           <Field.Text
             label="Email"
             type="email"

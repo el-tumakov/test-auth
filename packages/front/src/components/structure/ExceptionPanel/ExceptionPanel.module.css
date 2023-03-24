@@ -1,0 +1,48 @@
+.wrap {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.number {
+  margin: 0;
+  color: var(--accent-color);
+  font-weight: 800;
+  font-size: 128px;
+}
+
+.title {
+  margin-bottom: 16px;
+  font-weight: 700;
+  font-size: 36px;
+}
+
+.description {
+  margin: 0;
+  color: var(--text-color-secondary);
+  font-size: 18px;
+}
+
+.button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+  border-radius: var(--border-radius);
+  background-color: var(--accent-color);
+  padding: 8px 16px;
+  min-height: 40px;
+  color: var(--button-text-color);
+}
+
+.button:hover {
+  background-color: var(--button-color-hover);
+  text-decoration: none;
+}
+
+.button:focus-visible {
+  box-shadow: 0 0 0 3px var(--button-shadow-color);
+}
