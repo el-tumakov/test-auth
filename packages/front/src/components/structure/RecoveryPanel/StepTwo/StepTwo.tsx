@@ -25,6 +25,7 @@ const StepTwo: React.FC<StepTwo> = ({ codeParams, setCodeParams, setStep }) => {
   const [isShake, setShake] = useState(false);
   const [isPasswordFocus, setPasswordFocus] = useState(false);
   const [passwordValue, setPasswordValue] = useState<string>();
+  const [isLoading, setLoading] = useState(false);
 
   const onPasswordFocus = useCallback(() => {
     setPasswordFocus(true);
@@ -56,13 +57,19 @@ const StepTwo: React.FC<StepTwo> = ({ codeParams, setCodeParams, setStep }) => {
         return errors;
       }
 
+      setLoading(true);
+
       return setNewPassword(values)
         .then((response) => {
           if (response.reset) {
+            setLoading(false);
+
             return { code: 'Too many attempts' };
           }
 
           if (!response.valid) {
+            setLoading(false);
+
             return { code: 'Invalid code' };
           }
 
@@ -72,6 +79,7 @@ const StepTwo: React.FC<StepTwo> = ({ codeParams, setCodeParams, setStep }) => {
           }
         })
         .catch((err) => {
+          setLoading(false);
           shake(setShake);
 
           if (err?.cause?.error) {
@@ -130,14 +138,16 @@ const StepTwo: React.FC<StepTwo> = ({ codeParams, setCodeParams, setStep }) => {
         </p>
       </div>
 
-      <Field className="visually-hidden" name="email" initialValue={userEmail} aria-hidden>
-        <Field.Text
-          label="Email"
-          type="email"
-          placeholder="mail@example.com"
-          autoComplete="username"
-        />
-      </Field>
+      <div className="visually-hidden" aria-hidden>
+        <Field name="email" initialValue={userEmail}>
+          <Field.Text
+            label="Email"
+            type="email"
+            placeholder="mail@example.com"
+            autoComplete="username"
+          />
+        </Field>
+      </div>
 
       <Field name="code">
         <Field.Text
@@ -165,7 +175,7 @@ const StepTwo: React.FC<StepTwo> = ({ codeParams, setCodeParams, setStep }) => {
         {isPasswordFocus ? <PasswordStrength password={passwordValue} /> : null}
       </Field>
 
-      <Button type="submit" shake={isShake} fullWidth>
+      <Button type="submit" shake={isShake} loading={isLoading} fullWidth>
         Change password
       </Button>
     </Form>

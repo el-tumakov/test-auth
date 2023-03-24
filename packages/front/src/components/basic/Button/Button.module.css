@@ -38,6 +38,18 @@
   animation: shake 0.3s ease-in;
 }
 
+.loading,
+.loading:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+  background-color: var(--button-color-hover);
+}
+
+.spinner {
+  margin-left: 16px;
+  color: var(--button-spinner-color);
+}
+
 @keyframes shake {
   0% {
     transform: translateX(0);

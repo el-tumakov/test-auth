@@ -17,6 +17,7 @@ interface StepOneProps {
 const StepOne: React.FC<StepOneProps> = ({ setCodeParams, setStep }) => {
   const { userEmail, setUserEmail } = useStore();
   const [isSendShake, setShake] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const onSubmit = useCallback(
     (values: any) => {
@@ -34,12 +35,16 @@ const StepOne: React.FC<StepOneProps> = ({ setCodeParams, setStep }) => {
         return errors;
       }
 
+      setLoading(true);
+
       return requestNewPassword(values)
         .then((response) => {
           setCodeParams(response);
           setStep(2);
         })
         .catch((err) => {
+          setLoading(false);
+
           shake(setShake);
 
           if (err?.cause?.statusCode === 404) {
@@ -65,7 +70,7 @@ const StepOne: React.FC<StepOneProps> = ({ setCodeParams, setStep }) => {
           prefixIcon={<EmailOutlined />}
         />
       </Field>
-      <Button type="submit" shake={isSendShake} fullWidth>
+      <Button type="submit" shake={isSendShake} loading={isLoading} fullWidth>
         Send code
       </Button>
     </Form>

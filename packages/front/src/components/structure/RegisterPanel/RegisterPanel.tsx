@@ -19,6 +19,7 @@ const RegisterPanel: React.FC<{}> = () => {
   const [isShake, setShake] = useState(false);
   const [isPasswordFocus, setPasswordFocus] = useState(false);
   const [passwordValue, setPasswordValue] = useState<string>();
+  const [isLoading, setLoading] = useState(false);
 
   const onPasswordFocus = useCallback(() => {
     setPasswordFocus(true);
@@ -50,12 +51,16 @@ const RegisterPanel: React.FC<{}> = () => {
         return errors;
       }
 
+      setLoading(true);
+
       return signup(values)
         .then((response) => {
           setCookie('tumakov.testauth.token', response.token);
           router.push('/');
         })
         .catch((err) => {
+          setLoading(false);
+
           if (err?.cause?.error) {
             shake(setShake);
 
@@ -101,7 +106,7 @@ const RegisterPanel: React.FC<{}> = () => {
           />
           {isPasswordFocus ? <PasswordStrength password={passwordValue} /> : null}
         </Field>
-        <Button type="submit" shake={isShake} fullWidth>
+        <Button type="submit" shake={isShake} loading={isLoading} fullWidth>
           Create a new account
         </Button>
         <p className={styles.registerDescription}>

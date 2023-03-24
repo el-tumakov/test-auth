@@ -16,6 +16,7 @@ const LoginPanel: React.FC<{}> = () => {
   const router = useRouter();
   const [isShake, setShake] = useState(false);
   const { userEmail, setUserEmail } = useStore();
+  const [isLoading, setLoading] = useState(false);
 
   const onSubmit = useCallback(
     async (values: any) => {
@@ -38,12 +39,16 @@ const LoginPanel: React.FC<{}> = () => {
         return errors;
       }
 
+      setLoading(true);
+
       return signin(values)
         .then((response) => {
           setCookie('tumakov.testauth.token', response.token);
           router.push('/');
         })
         .catch((err) => {
+          setLoading(false);
+
           if (err?.cause?.statusCode === 401) {
             shake(setShake);
 
@@ -80,7 +85,7 @@ const LoginPanel: React.FC<{}> = () => {
           </Field>
           <Link href="/recovery">Forgot password?</Link>
         </div>
-        <Button type="submit" shake={isShake} fullWidth>
+        <Button type="submit" shake={isShake} loading={isLoading} fullWidth>
           Login
         </Button>
         <p className={styles.registerDescription}>
