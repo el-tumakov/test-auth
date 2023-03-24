@@ -97,7 +97,7 @@ export class AuthService {
     const code = String(Math.random()).substring(2, 6);
 
     const verification = await this.verificationService.setCode({
-      entry: 'auth:newPassword:code',
+      entry: `auth:${email}:newPassword:code`,
       code,
       params: {
         maxAttempts: 3,
@@ -134,7 +134,7 @@ export class AuthService {
     }
 
     const verification = await this.verificationService.checkCode(
-      'auth:newPassword:code',
+      `auth:${email}:newPassword:code`,
       code,
     );
 
