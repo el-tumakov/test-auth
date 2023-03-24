@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 import { Injectable, Logger } from '@nestjs/common';
 
@@ -10,7 +11,7 @@ export class TemplatesService {
 
   async loadHtmlTemplate(templatePath: string): Promise<string | null> {
     return fs.promises
-      .readFile('src/templates/html' + templatePath)
+      .readFile(path.join(__dirname, '../../templates/html' + templatePath))
       .then((value) => value.toString())
       .catch((err) => {
         this.logger.error(err);
